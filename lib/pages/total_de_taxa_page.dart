@@ -37,7 +37,7 @@ class _TotalDeTaxaPageState extends State<TotalDeTaxaPage> {
                   heightFactor: 0.5,
                   alignment: Alignment.bottomRight,
                   child: Text(
-                    numeroDisplay,
+                    'R\$ $numeroDisplay',
                     style: const TextStyle(
                       fontSize: 30,
                     ),
@@ -275,7 +275,6 @@ class _TotalDeTaxaPageState extends State<TotalDeTaxaPage> {
                                       Variaveis.totalTaxa =
                                           valor; // Adicione ao total de Taxa
                                       numeroDisplay = '';
-
                                       double fechamentoCaixa =
                                           Variaveis.totalVenda -
                                               Variaveis.totalCartao -
@@ -283,8 +282,11 @@ class _TotalDeTaxaPageState extends State<TotalDeTaxaPage> {
                                       int fechamentoFinal =
                                           fechamentoCaixa.ceil();
                                       double porcentagem =
-                                          Variaveis.totalTaxa * 0.30;
-                                      int porcentagemFinal = porcentagem.ceil();
+                                          Variaveis.totalTaxa * 0.3;
+                                      int porcentagemFinal =
+                                          porcentagem.round();
+                                      int total =
+                                          fechamentoFinal + porcentagemFinal;
                                       Navigator.pop(context);
                                       showDialog(
                                           context: context,
@@ -295,8 +297,8 @@ class _TotalDeTaxaPageState extends State<TotalDeTaxaPage> {
                                                         children: <InlineSpan>[
                                                   TextSpan(
                                                       text: fechamentoFinal < 0
-                                                          ? 'Deve ser pago ao garçom R\$'
-                                                          : 'O garçom deve pagar R\$'),
+                                                          ? 'O garçom deve receber R\$ '
+                                                          : 'O garçom deve pagar R\$ '),
                                                   TextSpan(
                                                       text: fechamentoFinal < 0
                                                           ? (fechamentoFinal *
@@ -307,6 +309,8 @@ class _TotalDeTaxaPageState extends State<TotalDeTaxaPage> {
                                                               .toStringAsFixed(
                                                                   2),
                                                       style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                           color:
                                                               fechamentoFinal <
                                                                       0
@@ -318,15 +322,38 @@ class _TotalDeTaxaPageState extends State<TotalDeTaxaPage> {
                                                           ' para fechar o caixa.'),
                                                   const TextSpan(
                                                       text:
-                                                          '\nE o garçom deve pagar R\$'),
+                                                          '\n\nE o garçom deve pagar R\$ '),
                                                   TextSpan(
                                                       text: porcentagemFinal
                                                           .toStringAsFixed(2),
                                                       style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                           color: Colors.green)),
                                                   const TextSpan(
                                                       text:
                                                           ' para a casa como 3%.'),
+                                                  const TextSpan(
+                                                      text:
+                                                          '\n\nO valor de R\$ '),
+                                                  TextSpan(
+                                                      text: total < 0
+                                                          ? (total * -1)
+                                                              .toStringAsFixed(
+                                                                  2)
+                                                          : total
+                                                              .toStringAsFixed(
+                                                                  2),
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: total < 0
+                                                              ? Colors.red
+                                                              : Colors.green)),
+                                                  TextSpan(
+                                                      text: total < 0
+                                                          ? ' deve ser pago ao garçom.'
+                                                          : ' deve ser pago ao caixa.'),
                                                 ])));
                                           });
                                     });

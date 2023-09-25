@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Calculadora Garçom',
       theme: ThemeData(
         colorScheme: const ColorScheme.dark(),
         useMaterial3: true,

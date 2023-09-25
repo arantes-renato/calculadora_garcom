@@ -38,7 +38,7 @@ class _TotalDeVendaPageState extends State<TotalDeVendaPage> {
                   heightFactor: 0.5,
                   alignment: Alignment.bottomRight,
                   child: Text(
-                    numeroDisplay,
+                    'R\$ $numeroDisplay',
                     style: const TextStyle(
                       fontSize: 30,
                     ),
